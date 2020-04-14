@@ -116,7 +116,6 @@ namespace CWork_v1._0
 
             Backpack backpack = new Backpack(capacity);
             backpack.GetAllCombinations(items);
-
             List<Item> resList = backpack.ShowBestCombination();
 
             foreach (Item item in resList)
