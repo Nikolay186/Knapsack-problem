@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CWork_v1._0
 {
     class Backpack
     {
         List<Item> IMax = new List<Item>();
-
+              
         private double mWeight;
-
         private double mPrice;
-
+        
         public Backpack(int bCapacity)
         {
             mWeight = bCapacity;
@@ -28,7 +23,7 @@ namespace CWork_v1._0
             {
                 List<Item> set = new List<Item>(items);
                 set.RemoveAt(i);
-                GetAllCombinations(set);
+                GetAllCombinations(set);  
             }
         }
 
@@ -39,7 +34,6 @@ namespace CWork_v1._0
                 IMax = items;
                 mPrice = GetPrice(items);
             }
-
         }
 
         private double GetWeight(List<Item> items)

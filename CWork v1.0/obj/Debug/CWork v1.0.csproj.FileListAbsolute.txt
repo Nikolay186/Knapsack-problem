@@ -1,0 +1,10 @@
+C:\Users\Николай\source\repos\CWork v1.0\CWork v1.0\bin\Debug\CWork v1.0.exe.config
+C:\Users\Николай\source\repos\CWork v1.0\CWork v1.0\bin\Debug\CWork v1.0.exe
+C:\Users\Николай\source\repos\CWork v1.0\CWork v1.0\bin\Debug\CWork v1.0.pdb
+C:\Users\Николай\source\repos\CWork v1.0\CWork v1.0\obj\Debug\CWork v1.0.csprojAssemblyReference.cache
+C:\Users\Николай\source\repos\CWork v1.0\CWork v1.0\obj\Debug\CWork_v1._0.Form1.resources
+C:\Users\Николай\source\repos\CWork v1.0\CWork v1.0\obj\Debug\CWork_v1._0.Properties.Resources.resources
+C:\Users\Николай\source\repos\CWork v1.0\CWork v1.0\obj\Debug\CWork v1.0.csproj.GenerateResource.cache
+C:\Users\Николай\source\repos\CWork v1.0\CWork v1.0\obj\Debug\CWork v1.0.csproj.CoreCompileInputs.cache
+C:\Users\Николай\source\repos\CWork v1.0\CWork v1.0\obj\Debug\CWork v1.0.exe
+C:\Users\Николай\source\repos\CWork v1.0\CWork v1.0\obj\Debug\CWork v1.0.pdb
