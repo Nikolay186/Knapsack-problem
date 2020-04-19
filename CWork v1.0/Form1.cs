@@ -16,7 +16,6 @@ namespace CWork_v1._0
             InitializeComponent();
         }
 
-        
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             n = (int)numericUpDown1.Value;
@@ -34,13 +33,6 @@ namespace CWork_v1._0
             {
                 ParseFile(openFileDialog1.FileName);
             }
-        }
-
-        private void reinitialize()
-        {
-            n = 0;
-            capacity = 0;
-            items.Clear();
         }
 
         private void saveSlnBtn_Click(object sender, EventArgs e)
@@ -120,7 +112,7 @@ namespace CWork_v1._0
             textBox3.Clear();
             AddItems();
             ShowItems(items);
-
+            
             Backpack backpack = new Backpack(capacity);
             backpack.GetAllCombinations(items);
             List<Item> resList = backpack.ShowBestCombination();
@@ -129,7 +121,8 @@ namespace CWork_v1._0
             {
                 textBox2.Text += "Name: " + item.name + " Weight: " + item.weight + " Price: " + item.price + "\r\n";
             }
-            reinitialize();
-        }       
+            tabControl1.SelectedTab = tabPage2;
+            items.Clear();
+        }      
     }
 }

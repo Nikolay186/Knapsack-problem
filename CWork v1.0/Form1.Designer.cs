@@ -46,9 +46,9 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -132,17 +132,16 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(477, 9);
+            this.checkBox1.Location = new System.Drawing.Point(623, 11);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(58, 17);
             this.checkBox1.TabIndex = 5;
             this.checkBox1.Text = "Details";
             this.checkBox1.UseVisualStyleBackColor = true;
-            
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(396, 6);
+            this.button1.Location = new System.Drawing.Point(542, 6);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -261,15 +260,6 @@
             this.tabPage3.Text = "Details";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "Text files|*.txt";
-            // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.Filter = "TXT files|*.txt";
-            // 
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(6, 6);
@@ -278,6 +268,15 @@
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(756, 388);
             this.textBox3.TabIndex = 0;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Text files|*.txt";
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "TXT files|*.txt";
             // 
             // Form1
             // 
