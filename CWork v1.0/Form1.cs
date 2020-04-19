@@ -36,6 +36,13 @@ namespace CWork_v1._0
             }
         }
 
+        private void reinitialize()
+        {
+            n = 0;
+            capacity = 0;
+            items.Clear();
+        }
+
         private void saveSlnBtn_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -122,6 +129,7 @@ namespace CWork_v1._0
             {
                 textBox2.Text += "Name: " + item.name + " Weight: " + item.weight + " Price: " + item.price + "\r\n";
             }
+            reinitialize();
         }       
     }
 }
