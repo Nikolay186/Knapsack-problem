@@ -15,6 +15,8 @@ Then set the capacity of a backpack(max capacity is 1000, but you can change it 
 
 When you're ready(data table is filled, capacity is set up) click the "Start" button. 
 
+If the "Details" checkbox is checked, then all the sets will appear on the "Details" tab. Be carefull here, if you have more than 6 items it can be unstable and cause crash. I'm still working on it.
+
 The solution set for your setup will appear in the "Result" tab.
 
 You can save the solution in *.txt file, by clicking the "Save solution" button.
