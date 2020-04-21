@@ -11,6 +11,7 @@ namespace CWork_v1._0
         int n = 0;
         int capacity = 0;
         List<Item> items = new List<Item>();
+        List<List<Item>> currList = new List<List<Item>>();
         public Form1()
         {
             InitializeComponent();
@@ -110,19 +111,40 @@ namespace CWork_v1._0
             textBox1.Clear();
             textBox2.Clear();
             textBox3.Clear();
+            progressBar1.Value = 0;
             AddItems();
             ShowItems(items);
-            
             Backpack backpack = new Backpack(capacity);
             backpack.GetAllCombinations(items);
-            List<Item> resList = backpack.ShowBestCombination();
+            
+            if (checkBox1.Checked)
+            {
+                currList = backpack.ReturnCurrentBestSet();
+                progressBar1.Maximum = currList.Count;
+                foreach (List<Item> items in currList)
+                {
+                    foreach (Item item2 in items)
+                    {
+                        textBox3.Text += $"{item2.name} \t {item2.weight} \t {item2.price} \r\n";
+                        progressBar1.PerformStep();
+                    }
+                    textBox3.Text += $"Total price: {backpack.GetPrice(items)} \t Total Weight: {backpack.GetWeight(items)} \r\n";
+                    textBox3.Text += "------------------------------------------------------------------------------------------------- \r\n";
+                }
+            }
 
+            List<Item> resList = backpack.ShowBestCombination();
+            progressBar1.Maximum = resList.Count;
             foreach (Item item in resList)
             {
-                textBox2.Text += "Name: " + item.name + " Weight: " + item.weight + " Price: " + item.price + "\r\n";
+                textBox2.Text += "Name: " + item.name + "\t" + "Weight: " + item.weight + "\t" + "Price: " + item.price + "\t" + "\r\n";
+                progressBar1.PerformStep();
             }
+            textBox2.Text += $"Total price: {backpack.GetPrice(resList)} \t Total Weight: {backpack.GetWeight(resList)} \r\n";
             tabControl1.SelectedTab = tabPage2;
             items.Clear();
-        }      
+            resList.Clear();
+            currList.Clear();
+        }
     }
 }

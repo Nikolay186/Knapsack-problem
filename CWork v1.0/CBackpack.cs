@@ -5,6 +5,7 @@ namespace CWork_v1._0
     class Backpack
     {
         List<Item> IMax = new List<Item>();
+        List<List<Item>> allSets = new List<List<Item>>();
               
         private double mWeight;
         private double mPrice;
@@ -17,13 +18,15 @@ namespace CWork_v1._0
         public void GetAllCombinations(List<Item> items)
         {
             if (items.Count > 0)
+            {
                 IsBest(items);
-
+                allSets.Add(items);
+            }
             for (int i = 0; i < items.Count; i++)
             {
                 List<Item> set = new List<Item>(items);
                 set.RemoveAt(i);
-                GetAllCombinations(set);  
+                GetAllCombinations(set);
             }
         }
 
@@ -36,7 +39,12 @@ namespace CWork_v1._0
             }
         }
 
-        private double GetWeight(List<Item> items)
+        public List<List<Item>> ReturnCurrentBestSet()
+        {
+            return allSets;
+        }
+
+        public double GetWeight(List<Item> items)
         {
             double currentWeight = 0;
 
@@ -47,7 +55,7 @@ namespace CWork_v1._0
             return currentWeight;
         }
 
-        private double GetPrice(List<Item> items)
+        public double GetPrice(List<Item> items)
         {
             double currentPrice = 0;
 
