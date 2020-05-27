@@ -63,7 +63,7 @@ namespace CWork_v1._0
             numericUpDown1.Value = linesCount;
             n = linesCount;
 
-            Regex Iname = new Regex(@"^[A-z]+", RegexOptions.Multiline);
+            Regex Iname = new Regex(@"^[A-z]+\b", RegexOptions.Multiline);
             Regex Iweight = new Regex(@"\b\d*\.?\d\b*", RegexOptions.Multiline);
             Regex Iprice = new Regex(@"\b\d*\.?\d*$", RegexOptions.Multiline);
 
@@ -112,10 +112,15 @@ namespace CWork_v1._0
             textBox2.Clear();
             textBox3.Clear();
             progressBar1.Value = 0;
+           
             AddItems();
             ShowItems(items);
+
+            IRSort sort = new IRSort();
+            items.Sort(sort);
+
             Backpack backpack = new Backpack(capacity);
-            backpack.GetAllCombinations(items);
+            backpack.Start(items);
             
             if (checkBox1.Checked)
             {
@@ -132,7 +137,7 @@ namespace CWork_v1._0
                     textBox3.Text += "------------------------------------------------------------------------------------------------- \r\n";
                 }
             }
-
+            
             List<Item> resList = backpack.ShowBestCombination();
             progressBar1.Maximum = resList.Count;
             foreach (Item item in resList)
