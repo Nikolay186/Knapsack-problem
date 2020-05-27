@@ -5,16 +5,17 @@ Firstly, you need to create *.txt file with the list of items(ItemName ItemWeigh
 max items count is 100, but you can change it in numericUpDown1 properties)
 
 For example:
-
+<p><code>
 Cup 1 10
 
 Laptop 4.2 20000
+</code></p>
 
 Then set the capacity of a backpack(max capacity is 1000, but you can change it in numericUpDown2 properties).
 
-"Details" function is developing now.
-
 When you're ready(data table is filled, capacity is set up) click the "Start" button. 
+
+If the "Details" checkbox is checked, then all the sets will appear on the "Details" tab. Be carefull here, if you have more than 6 items it can be unstable and cause crash. I'm still working on it.
 
 The solution set for your setup will appear in the "Result" tab.
 
