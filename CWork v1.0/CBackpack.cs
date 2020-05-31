@@ -44,13 +44,8 @@ namespace CWork_v1._0
 
             if (full)
             {
-                cPrice = GetPrice(tSet);
-                if (GetPrice(st) > cPrice)
-                {
-                    tSet = st;
-                    allSets.Add(st);
-                    IsBest(st);
-                }
+                allSets.Add(st);
+                IsBest(st);               
             }
         }
 
@@ -77,7 +72,7 @@ namespace CWork_v1._0
 
         }
 
-        public List<List<Item>> ReturnCurrentBestSet()
+        public List<List<Item>> ReturnAllSets()
         {
             return allSets;
         }

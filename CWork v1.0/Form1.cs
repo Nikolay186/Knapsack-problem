@@ -124,7 +124,7 @@ namespace CWork_v1._0
             
             if (checkBox1.Checked)
             {
-                currList = backpack.ReturnCurrentBestSet();
+                currList = backpack.ReturnAllSets();
                 progressBar1.Maximum = currList.Count;
                 foreach (List<Item> items in currList)
                 {
