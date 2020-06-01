@@ -125,6 +125,10 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(756, 360);
             this.dataGridView1.TabIndex = 6;
+            Column2.ValueType = typeof(string);
+            Column3.ValueType = typeof(double);
+            Column4.ValueType = typeof(double);
+            this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
             // 
             // Column2
             // 

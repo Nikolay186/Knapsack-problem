@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using System;
-using System.Runtime.CompilerServices;
-using System.Collections;
 
 namespace CWork_v1._0
 {
@@ -10,11 +7,9 @@ namespace CWork_v1._0
         List<Item> IMax = new List<Item>();
         List<List<Item>> allSets;
         List<Item> set;
-        List<Item> tSet = new List<Item>();
 
         private double mWeight { get; set; }
         private double mPrice = 0;
-        private double cPrice = 0;
 
         public Backpack(int bCapacity)
         {

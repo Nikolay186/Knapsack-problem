@@ -15,12 +15,23 @@ namespace CWork_v1._0
         public Form1()
         {
             InitializeComponent();
+            
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            n = (int)numericUpDown1.Value;
-            dataGridView1.RowCount = n;
+            try
+            {
+                n = (int)numericUpDown1.Value;
+                dataGridView1.RowCount = n;
+                if (n != dataGridView1.RowCount)
+                    button1.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error occurred!");
+                numericUpDown1.Value = 1;
+            }
         }
 
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
@@ -28,11 +39,19 @@ namespace CWork_v1._0
             capacity = (int)numericUpDown2.Value;
         }
 
+
         private void loadDataBtn_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            try
             {
-                ParseFile(openFileDialog1.FileName);
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    ParseFile(openFileDialog1.FileName);                   
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
             }
         }
 
@@ -56,36 +75,51 @@ namespace CWork_v1._0
 
         private void ParseFile(string file)
         {
-            StreamReader sr = new StreamReader(file);
-            string str;
-            int linesCount = File.ReadAllLines(file).Length;
-            dataGridView1.RowCount = linesCount;
-            numericUpDown1.Value = linesCount;
-            n = linesCount;
-
-            Regex Iname = new Regex(@"^[A-z]+\b", RegexOptions.Multiline);
-            Regex Iweight = new Regex(@"\b\d*\.?\d\b*", RegexOptions.Multiline);
-            Regex Iprice = new Regex(@"\b\d*\.?\d*$", RegexOptions.Multiline);
-
-            int i = 0;
-            while (!sr.EndOfStream)
+            try
             {
-                str = sr.ReadLine();
+                StreamReader sr = new StreamReader(file);
+                string str;
+                int linesCount = File.ReadAllLines(file).Length;
+                dataGridView1.RowCount = linesCount;
+                numericUpDown1.Value = linesCount;
+                n = linesCount;
 
-                if (Iname.IsMatch(str))
+                Regex rstring = new Regex(@"(^[A-z]+.*[A-z]+)(\s\d\.?\d*)(\s\d*\.?\d*)");
+                Regex Iname = new Regex(@"^([A-z].+[A-z]+)", RegexOptions.Multiline);
+                Regex Iweight = new Regex(@"\b\d*\.?\d\b*", RegexOptions.Multiline);
+                Regex Iprice = new Regex(@"\b\d*\.?\d*$", RegexOptions.Multiline);
+
+                int i = 0;
+                while (!sr.EndOfStream)
                 {
-                    dataGridView1[0, i].Value = Iname.Match(str).ToString();
+                    str = sr.ReadLine();
+                    if (rstring.IsMatch(str))
+                    {
+                        if (Iname.IsMatch(str))
+                        {
+                            string nm = Iname.Match(str).Value;
+                            dataGridView1[0, i].Value = nm;
+                        }
+                        if (Iweight.IsMatch(str))
+                        {
+                            double nw = Convert.ToDouble(Iweight.Match(str).Value);
+                            dataGridView1[1, i].Value = Math.Abs(nw);
+                        }
+                        if (Iprice.IsMatch(str))
+                        {
+                            double np = Convert.ToDouble(Iprice.Match(str).Value);
+                            dataGridView1[2, i].Value = Math.Abs(np);
+                        }
+                        i++;
+                    }
+                    else
+                        throw new FormatException(); 
                 }
-                if (Iweight.IsMatch(str))
-                {
-                    dataGridView1[1, i].Value = Iweight.Match(str).ToString();
-                }
-                if (Iprice.IsMatch(str))
-                {
-                    dataGridView1[2, i].Value = Iprice.Match(str).ToString();
-                }
-                i++;
-            }          
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error occurred!");
+            }
         }
 
         private void AddItems()
@@ -108,6 +142,7 @@ namespace CWork_v1._0
 
         private void button1_Click(object sender, EventArgs e)
         {
+            dataGridView1.RowCount = n;
             textBox1.Clear();
             textBox2.Clear();
             textBox3.Clear();
@@ -150,6 +185,11 @@ namespace CWork_v1._0
             items.Clear();
             resList.Clear();
             currList.Clear();
+        }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {          
+            MessageBox.Show($"Error: {e.Exception.Message} at [{e.ColumnIndex + 1}, {e.RowIndex + 1}] cell.", "Error occurred!");
         }
     }
 }
