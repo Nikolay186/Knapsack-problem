@@ -8,28 +8,28 @@ namespace CWork_v1._0
 {
     public partial class Form1 : Form
     {
-        int n = 0;
         int capacity = 0;
         List<Item> items = new List<Item>();
-        List<List<Item>> currList = new List<List<Item>>();
+        List<List<Item>> allLists = new List<List<Item>>();
         public Form1()
         {
             InitializeComponent();
-            
+            dataGridView1.RowCount = 1;
+            Column2.ValueType = typeof(string);
+            Column3.ValueType = typeof(double);
+            Column4.ValueType = typeof(double);
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             try
             {
-                n = (int)numericUpDown1.Value;
-                dataGridView1.RowCount = n;
-                if (n != dataGridView1.RowCount)
-                    button1.Enabled = false;
+                dataGridView1.RowCount = (int)numericUpDown1.Value;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}", "Error occurred!");
+                dataGridView1.Rows.Clear();
                 numericUpDown1.Value = 1;
             }
         }
@@ -82,10 +82,9 @@ namespace CWork_v1._0
                 int linesCount = File.ReadAllLines(file).Length;
                 dataGridView1.RowCount = linesCount;
                 numericUpDown1.Value = linesCount;
-                n = linesCount;
 
-                Regex rstring = new Regex(@"(^[A-z]+.*[A-z]+)(\s\d\.?\d*)(\s\d*\.?\d*)");
-                Regex Iname = new Regex(@"^([A-z].+[A-z]+)", RegexOptions.Multiline);
+                Regex rstring = new Regex(@"(^[A-z]*.*[A-z]+)(\s\d\.?\d*)(\s\d*\.?\d*)");
+                Regex Iname = new Regex(@"^([A-z]*[A-z]+)", RegexOptions.Multiline);
                 Regex Iweight = new Regex(@"\b\d*\.?\d\b*", RegexOptions.Multiline);
                 Regex Iprice = new Regex(@"\b\d*\.?\d*$", RegexOptions.Multiline);
 
@@ -113,8 +112,12 @@ namespace CWork_v1._0
                         i++;
                     }
                     else
-                        throw new FormatException(); 
+                    {
+                        sr.Close();
+                        throw new FormatException();
+                    }
                 }
+                sr.Close();
             }
             catch (Exception ex)
             {
@@ -124,7 +127,7 @@ namespace CWork_v1._0
 
         private void AddItems()
         {
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < dataGridView1.RowCount; i++)
             {
                 items.Add(new Item(Convert.ToString(dataGridView1[0, i].Value), Convert.ToDouble(dataGridView1[1, i].Value), Convert.ToDouble(dataGridView1[2, i].Value)));
             }
@@ -135,19 +138,27 @@ namespace CWork_v1._0
             int f = 1;
             foreach (var Item in items)
             {
-                textBox1.Text += f + " - " + Item.name + " - " + Item.weight + " - " + Item.price + "\r\n";
+                textBox1.Text += f + ". " + Item.name + " - " + Item.weight + " - " + Item.price + "\r\n";
                 f++;
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            dataGridView1.RowCount = n;
             textBox1.Clear();
             textBox2.Clear();
             textBox3.Clear();
             progressBar1.Value = 0;
-           
+
+            for (int i = dataGridView1.Rows.Count - 1; i > -1; i--)
+            {
+                DataGridViewRow row = dataGridView1.Rows[i];
+                if (!row.IsNewRow && row.Cells[0].Value == null)
+                {
+                    dataGridView1.Rows.RemoveAt(i);
+                }
+            }
+
             AddItems();
             ShowItems(items);
 
@@ -159,13 +170,13 @@ namespace CWork_v1._0
             
             if (checkBox1.Checked)
             {
-                currList = backpack.ReturnAllSets();
-                progressBar1.Maximum = currList.Count;
-                foreach (List<Item> items in currList)
+                allLists = backpack.ReturnAllSets();
+                progressBar1.Maximum = allLists.Count;
+                foreach (List<Item> items in allLists)
                 {
                     foreach (Item item2 in items)
                     {
-                        textBox3.Text += $"{item2.name} \t {item2.weight} \t {item2.price} \r\n";
+                        textBox3.Text += $"{item2.name}    {item2.weight}   {item2.price} \r\n";
                         progressBar1.PerformStep();
                     }
                     textBox3.Text += $"Total price: {backpack.GetPrice(items)} \t Total Weight: {backpack.GetWeight(items)} \r\n";
@@ -184,12 +195,18 @@ namespace CWork_v1._0
             tabControl1.SelectedTab = tabPage2;
             items.Clear();
             resList.Clear();
-            currList.Clear();
+            allLists.Clear();
+            backpack.Clear();
         }
 
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {          
-            MessageBox.Show($"Error: {e.Exception.Message} at [{e.ColumnIndex + 1}, {e.RowIndex + 1}] cell.", "Error occurred!");
+            MessageBox.Show($"Error: {e.Exception.Message} at [{e.ColumnIndex + 1}, {e.RowIndex + 1}] cell.", "Error occurred!");         
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("\tПрограмму разработал студент 1 курса ОмГТУ, ФИТиКС \r\n\tВоробьев Николай Романович\r\n\tГруппа ПИН-192\r\n\t2020", "About");
         }
     }
 }

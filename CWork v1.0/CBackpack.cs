@@ -98,5 +98,13 @@ namespace CWork_v1._0
         {
             return IMax;
         }
+
+        public void Clear()
+        {
+            IMax.Clear();
+            allSets.Clear();
+            set.Clear();
+            mPrice = 0; 
+        }
     }
 }

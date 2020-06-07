@@ -1,18 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace CWork_v1._0
 {
     class Item
     {
         public string name { get; set; }
-
         public double weight { get; set; }
-
         public double price { get; set; }
-
         public double ratio { get; set; }
-
         public Item(string Iname, double Iweight, double Iprice)
         {
             name = Iname;
